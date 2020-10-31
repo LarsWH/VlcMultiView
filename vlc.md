@@ -45,7 +45,7 @@ echo %file_2%
 echo %file_3%
 echo %file_4%
 
-### Clean ###
+# ================ Clean =================
 taskkill /F /T /IM putty.exe
 taskkill /F /T /IM vlc.exe
 
@@ -63,17 +63,20 @@ set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
 # echo %kitty%
 # %kitty%
 # %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-%vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw
-%vlc% %file_2% -I telnet --telnet-host 127.0.0.1 --telnet-port 5552 --telnet-password=pw
-%vlc% %file_3% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-%vlc% %file_4% -I telnet --telnet-host 127.0.0.1 --telnet-port 5554 --telnet-password=pw
+%vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 
+%vlc% %file_2% -I telnet --telnet-host 127.0.0.1 --telnet-port 5552 --telnet-password=pw --zoom 0.4 --start-time 10
+%vlc% %file_3% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw --zoom 0.4 --start-time 100
+%vlc% %file_4% -I telnet --telnet-host 127.0.0.1 --telnet-port 5554 --telnet-password=pw --zoom 0.4 --start-time 1000
 # %vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
 
+# %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "zoom 10\nquit"
 
 # %kitty% telnet://master@127.0.0.1:5553 -pass pw
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help"
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription"
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription\nquit"
+
+
 
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "pause\nquit"
 %kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "pause\nquit"
@@ -85,11 +88,17 @@ set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "play\nquit"
 %kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "play\nquit"
 
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
+%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "rate 4\nquit"
+%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "rate 4\nquit"
+%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "rate 4\nquit"
+
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 1\nquit"
+%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "rate 1\nquit"
+%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "rate 1\nquit"
+%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "rate 1\nquit"
 
 
-set helpme=d:\tmp\cmd_help.txt
-type %helpme%
-putty telnet://127.0.0.1:5553 -m %helpme%
 
 
 
