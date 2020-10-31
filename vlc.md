@@ -40,14 +40,45 @@ set file_2=d:\tmp\dame_v\20201009_084636A.mp4
 set file_3=d:\tmp\man_cave\20201009_084916A.mp4
 set file_4=d:\tmp\mc\20201009_085815A.mp4
 
+set file_1a=d:\\tmp\\dame_h\\20201009_084612A.mp4
+set file_2a=d:\\tmp\\dame_v\\20201009_084636A.mp4
+set file_3a=d:\\tmp\\man_cave\\20201009_084916A.mp4
+set file_4a=d:\\tmp\\mc\\20201009_085815A.mp4
+
 echo %file_1%
 echo %file_2%
 echo %file_3%
 echo %file_4%
 
 # ================ Clean =================
-taskkill /F /T /IM putty.exe
+taskkill /F /T /IM kitty_portable-0.74.2.7.exe
 taskkill /F /T /IM vlc.exe
+
+
+# ---- Playlist ----
+%vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1
+# %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 --playlist-enqueue %file_1a%
+# %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 --playlist-enqueue %file_1%
+# %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 --playlist-enqueue %file_1% --playlist-enqueue %file_2%
+# %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1%\nquit"
+
+
+# This works...
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1a%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_2a%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_3a%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_4a%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 6\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 10\nquit"
+
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "zoom 1\nquit"
+
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_2%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1a%\nplaylist"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_4%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
 
 
 ### RC ####
@@ -69,7 +100,7 @@ set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
 %vlc% %file_4% -I telnet --telnet-host 127.0.0.1 --telnet-port 5554 --telnet-password=pw --zoom 0.4 --start-time 1000
 # %vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
 
-# %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "zoom 10\nquit"
+
 
 # %kitty% telnet://master@127.0.0.1:5553 -pass pw
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help"
