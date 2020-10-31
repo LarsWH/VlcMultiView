@@ -30,45 +30,61 @@ vlc --ttl 12 -vvv --color -I telnet --telnet-password videolan --rtsp-host 127.0
 set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
 
 cmd
+d:
+cd d:\tmp
+
+### Files ####
+dir /s /b *.mp4
+set file_1=d:\tmp\dame_h\20201009_084612A.mp4
+set file_2=d:\tmp\dame_v\20201009_084636A.mp4
+set file_3=d:\tmp\man_cave\20201009_084916A.mp4
+set file_4=d:\tmp\mc\20201009_085815A.mp4
+
+echo %file_1%
+echo %file_2%
+echo %file_3%
+echo %file_4%
+
 ### Clean ###
 taskkill /F /T /IM putty.exe
 taskkill /F /T /IM vlc.exe
+
 
 ### RC ####
 %vlc% -I rc --rc-host 127.0.0.1:5553
 putty telnet://127.0.0.1:5553  
 
-### Telnet ###
-%vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-#putty telnet://127.0.0.1:5553
-set mypw=d:\tmp\pw.txt
-echo pw >  %mypw%
-echo pw >>  %mypw%
-type %mypw%
-putty telnet://127.0.0.1:5553 -m %mypw%  
-
-### Telnet ###
-%vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-#putty telnet://127.0.0.1:5553
-set mypw=d:\tmp\pw.txt
-echo pw >  %mypw%
-echo pw >>  %mypw%
-type %mypw%
-putty telnet://127.0.0.1:5553 -m %mypw%  
 
 https://www.fosshub.com/KiTTY.html
 http://www.9bis.net/kitty/#!pages/CommandLine.md
 
 ### Kitty ###
-%vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
 set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
-echo %kitty%
-%kitty%
+# echo %kitty%
+# %kitty%
+# %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
+%vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw
+%vlc% %file_2% -I telnet --telnet-host 127.0.0.1 --telnet-port 5552 --telnet-password=pw
+%vlc% %file_3% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
+%vlc% %file_4% -I telnet --telnet-host 127.0.0.1 --telnet-port 5554 --telnet-password=pw
+# %vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
 
-%kitty% telnet://master@127.0.0.1:5553 -pass pw
+
+# %kitty% telnet://master@127.0.0.1:5553 -pass pw
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help"
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription"
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription\nquit"
+
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "pause\nquit"
+%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "pause\nquit"
+%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "pause\nquit"
+%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "pause\nquit"
+
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
+%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "play\nquit"
+%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "play\nquit"
+%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "play\nquit"
+
 
 
 set helpme=d:\tmp\cmd_help.txt
@@ -76,24 +92,4 @@ type %helpme%
 putty telnet://127.0.0.1:5553 -m %helpme%
 
 
-d:
-cd d:\tmp
 
-wsl
-telnet 127.0.0.1 5553
-echo 'help' | telnet 127.0.0.1 5553
-( echo open 127.0.0.1 5553 
-sleep 5
-echo your_login
-sleep 5
-echo your_password
-sleep 5
-echo hostname
-sleep 5
-echo exit ) | telnet
-
-# WSL
-nc -zv 12if7.0.0.1 5553
-ifconfig
-# PS
-Test-NetConnection 127.0.0.1 -Port 5553
