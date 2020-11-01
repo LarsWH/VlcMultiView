@@ -63,12 +63,45 @@ taskkill /F /T /IM vlc.exe
 # %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1%\nquit"
 
 
-# This works...
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1a%\nquit"
+# playlist This works...
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_1a%\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_2a%\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_3a%\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_4a%\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
+
+# playlist NEW --------------------
+set DIRS=d:\tmp\
+set DIR_1=pl1
+set DIR_1_PATH=%DIRS%%DIR_1%
+set PLAYLIST_1=playlist_1
+WHERE /R %DIR_1_PATH% *.mp4
+WHERE /R %DIR_1_PATH% *.mp4 > %PLAYLIST_1%.txt
+type %PLAYLIST_1%.txt
+
+for /F "tokens=*" %A in (%PLAYLIST_1%.txt) do echo %A
+
+# https://stackoverflow.com/a/6159108/1617124
+set str=teh cat in teh hat
+echo.%str%
+set str=%str:teh=the%
+echo.%str%
+
+# 
+type %PLAYLIST_1%.txt
+powershell -Command "(gc %PLAYLIST_1%.txt) -replace 'foo', 'bar'"
+powershell -Command "(gc %PLAYLIST_1%.txt) -replace '\\', '\\'"
+powershell -Command "(gc %PLAYLIST_1%.txt) -replace '\\', '\\' | Out-File -encoding ASCII %PLAYLIST_1%_.txt"
+type %PLAYLIST_1%_.txt
+for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %A
+# for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A%\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
+for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A\nquit"
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
+
+
+# Speed stuff ---------------
+%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 6\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 10\nquit"
