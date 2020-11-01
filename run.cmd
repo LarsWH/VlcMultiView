@@ -5,6 +5,6 @@ call config.cmd
 setlocal ENABLEDELAYEDEXPANSION 
 for /F "tokens=*" %%A in (folders.txt) do (
     set /a port=port+1
-    %kitty_full% telnet://master@127.0.0.1:!port! -pass pw -cmd "%1\nquit"
+    start "yyy" %kitty_full% telnet://master@127.0.0.1:!port! -pass pw -cmd "%1\nquit"
 ) 
 endlocal

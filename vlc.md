@@ -36,13 +36,6 @@ After downloading the above tools, proceed like this:
   - `run rate <n>` to increase the playback to n-times (yes, there are limits...)
 
 
-
-cmd
-cd C:\Program Files\VideoLAN\VLC
-vlc --help
-# start "fil1" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4" && start "fil2" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Taarn_m_vand\20201009_090712A.mp4"
-
-
 https://superuser.com/questions/665838/vlc-play-two-mp3s-simultaneously-from-command-line
 
 
@@ -50,25 +43,21 @@ cmd
 d:
 cd d:\tmp
 
-# 
-# 
+### ================ Clean =================
+Clean up:
+- kill-it
 
-%vlc% --version
+Initialize
+- startloop
 
-# ================ Clean =================
-kill-it
+Control
+- run play
+- run pause
+- run stop
 
-startloop
-run play
-run pause
-run stop
-
-run_stay playlist
-run_stay help
-
-
-
-
+Info
+- run_stay playlist
+- run_stay help
 
 # Start playing ---------------
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
