@@ -1,5 +1,6 @@
 @echo off
 call config.cmd
+@set /a port=%port_start%
 :: https://stackoverflow.com/a/2919699/1617124
 setlocal ENABLEDELAYEDEXPANSION 
 for /F "tokens=*" %%A in (folders.txt) do (

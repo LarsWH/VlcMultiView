@@ -1,7 +1,7 @@
 # Multi VLC viewer utility for Windows
 This utility is intended to control (start, stop, pause, forward, backward, speed) multiple VLC players, each running each own playlist of MP4 files
 
-The utility is making use of the 'telnet' remote control interface of VLC and this is very sub-optimal in terms of speed/responsiveness, but it works.
+The utility is making use of the 'telnet' remote control interface of VLC and unfortunatly this is very sub-optimal in terms of speed/responsiveness, but it works.
 
 ## VLC
 Install VLC. These instructions are validated with VLC version 2.2.8 and .....
