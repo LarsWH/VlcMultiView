@@ -5,6 +5,7 @@ call config.cmd
 setlocal ENABLEDELAYEDEXPANSION 
 for /F "tokens=*" %%A in (folders.txt) do (
     set /a port=port+1
-    call start_and_enqueue.cmd %%A\playlist.pl !port! %zoom% %advance%
+    call %%A\advance.cmd
+    call start_and_enqueue.cmd %%A\playlist.pl !port! %zoom% !advance!
 ) 
 endlocal

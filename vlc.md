@@ -29,6 +29,7 @@ After downloading the above tools, proceed like this:
 - Generated play-list files by running
   - `playlist`. This generates play lists based on the `folders.txt` file. 
 - Check the folders to see if the generated playlists are OK
+- In the same folders, there are auto-generated `advance.cmd` files. These can be used to advance the play back a number of seconds. 
 - Initialize the system:
   - `startup` which starts VLC and loads playlists, but does not start playback. 
 - Now you are ready to start the play-back

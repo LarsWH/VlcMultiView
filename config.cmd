@@ -5,6 +5,5 @@
 @set vlc_exe=vlc.exe
 @set vlc_full="C:\Program Files\VideoLAN\VLC\"%vlc_exe%
 :: Default values
-@set advance=2
 @set zoom=0.4
 @set port_start=5550
