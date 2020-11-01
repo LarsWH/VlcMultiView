@@ -55,6 +55,10 @@ taskkill /F /T /IM kitty_portable-0.74.2.7.exe
 taskkill /F /T /IM vlc.exe
 
 
+set /a port=5550 && for /F "tokens=*" %A in (folders.txt) do (set /a port=port+1 && call startup.cmd %A\playlist.pl %port%)
+
+
+
 # ---- Playlist ----
 %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1
 # %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 --playlist-enqueue %file_1a%
@@ -71,58 +75,36 @@ taskkill /F /T /IM vlc.exe
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
 
 # playlist NEW --------------------
+
+
 set DIRS=d:\tmp\
 set DIR_1=pl1
 set DIR_1_PATH=%DIRS%%DIR_1%
 set PLAYLIST_1=playlist_1
-WHERE /R %DIR_1_PATH% *.mp4
-WHERE /R %DIR_1_PATH% *.mp4 > %PLAYLIST_1%.txt
-type %PLAYLIST_1%.txt
 
-for /F "tokens=*" %A in (%PLAYLIST_1%.txt) do echo %A
-
-# https://stackoverflow.com/a/6159108/1617124
-set str=teh cat in teh hat
-echo.%str%
-set str=%str:teh=the%
-echo.%str%
-
-# 
-type %PLAYLIST_1%.txt
-powershell -Command "(gc %PLAYLIST_1%.txt) -replace 'foo', 'bar'"
-powershell -Command "(gc %PLAYLIST_1%.txt) -replace '\\', '\\'"
-powershell -Command "(gc %PLAYLIST_1%.txt) -replace '\\', '\\' | Out-File -encoding ASCII %PLAYLIST_1%_.txt"
-type %PLAYLIST_1%_.txt
-for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %A
+# for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %A
 # for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A%\nquit"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
 for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
 
 
-# Speed stuff ---------------
+# Start playing ---------------
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
+
+# Speed stuff ---------------
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 6\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 10\nquit"
 
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "zoom 1\nquit"
 
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %file_2%\nquit"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_1a%\nplaylist"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "add %file_4%\nquit"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
 
 
-### RC ####
-%vlc% -I rc --rc-host 127.0.0.1:5553
-putty telnet://127.0.0.1:5553  
-
-
-https://www.fosshub.com/KiTTY.html
-http://www.9bis.net/kitty/#!pages/CommandLine.md
 
 ### Kitty ###
+# https://www.fosshub.com/KiTTY.html
+# http://www.9bis.net/kitty/#!pages/CommandLine.md
+
 set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
 # echo %kitty%
 # %kitty%
@@ -161,8 +143,3 @@ set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
 %kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "rate 1\nquit"
 %kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "rate 1\nquit"
 %kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "rate 1\nquit"
-
-
-
-
-
