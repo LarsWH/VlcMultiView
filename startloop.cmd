@@ -1,8 +1,5 @@
 @echo off
-set /a advance=0
-set /a zoom=1
-set /a port=5550
-
+call config.cmd
 :: https://stackoverflow.com/a/2919699/1617124
 setlocal ENABLEDELAYEDEXPANSION 
 for /F "tokens=*" %%A in (folders.txt) do (

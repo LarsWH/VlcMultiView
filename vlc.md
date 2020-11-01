@@ -1,3 +1,42 @@
+# Multi VLC viewer utility for Windows
+This utility is intended to control (start, stop, pause, forward, backward, speed) multiple VLC players, each running each own playlist of MP4 files
+
+The utility is making use of the 'telnet' remote control interface of VLC and this is very sub-optimal in terms of speed/responsiveness, but it works.
+
+## VLC
+Install VLC. These instructions are validated with VLC version 2.2.8 and .....
+
+VLC has some 'remote control' options. In this project the 'telnet' method is used.
+
+More information about the command line options: https://wiki.videolan.org/Documentation:Command_line
+
+
+## Kitty
+Download 'KiTTY' which is a fork of 'PuTTY'. KiTTY is needed to automate telnet login with password, asthis is not supported by PuTTY.
+
+KiTTY home: http://www.9bis.net/kitty/#!pages/CommandLine.md
+
+KiTTY download: https://www.fosshub.com/KiTTY.html. I simply downloaded the `kitty-portable-....` version, which is selfcontained (no installation required)
+
+## Setup
+After downloading the above tools, proceed like this:
+- go to suitable folder and clone this repo: git clone ......
+- edit the file `config.cmd` to reflect your installation:
+- edit the file `folders.txt` to reflect where your MP4 files are located
+
+## Run
+- Open a command prompt in the git folder
+- Run `playlist` to generated play-list files based on the `folders.txt` file. 
+- Look in the folders to see the generated playlists look OK
+- Run `startloop` to start up the VLC instances and initialize them with playlists. The will MP4 files will not be played yet
+- (Optional: run `run_stay playlist` to see if the playlists have been imported. You must manully write `quit` multiple times to exit KiTTY) 
+- Now you are ready to start the play-back
+  - `run start` to start playing
+  - `run pause` to pause playing
+  - `run rate <n>` to increase the playback to n-times (yes, there are limits...)
+
+
+
 cmd
 cd C:\Program Files\VideoLAN\VLC
 vlc --help
@@ -11,21 +50,22 @@ cmd
 d:
 cd d:\tmp
 
-# https://www.fosshub.com/KiTTY.html
-# http://www.9bis.net/kitty/#!pages/CommandLine.md
-set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
-set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
+# 
+# 
+
+%vlc% --version
 
 # ================ Clean =================
-taskkill /F /T /IM kitty_portable-0.74.2.7.exe
-taskkill /F /T /IM vlc.exe
-taskkill /F /T /IM vlc.exe
-taskkill /F /T /IM vlc.exe
+kill-it
 
-call startloop.cmd
-call run.cmd play
-call run.cmd pause
-call run_stay.cmd playlist
+startloop
+run play
+run pause
+run stop
+
+run_stay playlist
+run_stay help
+
 
 
 
