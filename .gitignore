@@ -1,0 +1,7 @@
+*.mp4
+*.log
+*.exe
+ActivityLog.xsl
+/Jumplist
+/Sessions
+*.ini
