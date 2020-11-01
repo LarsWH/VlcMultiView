@@ -27,83 +27,22 @@ After downloading the above tools, proceed like this:
 ## Run
 - Open a command prompt in the git folder
 - Run `playlist` to generated play-list files based on the `folders.txt` file. 
-- Look in the folders to see the generated playlists look OK
-- Run `startloop` to start up the VLC instances and initialize them with playlists. The will MP4 files will not be played yet
-- (Optional: run `run_stay playlist` to see if the playlists have been imported. You must manully write `quit` multiple times to exit KiTTY) 
+- Check the folders to see if the generated playlists are OK
+- Initialize the system:
+  - `startup` which starts VLC and loads playlists, but does not start playback. 
 - Now you are ready to start the play-back
-  - `run start` to start playing
-  - `run pause` to pause playing
-  - `run rate <n>` to increase the playback to n-times (yes, there are limits...)
-
-
-https://superuser.com/questions/665838/vlc-play-two-mp3s-simultaneously-from-command-line
+  - `run start` : start playing
+  - `run pause` : pause playing
+  - `run rate <n>` : increase the playback to n-times (yes, there are limits...)
+  - `run zoom 0.6` : chang the zoom ratio
+- Cleanup
+  - `kill-it` : kills running VLC and KiTTY processes
+- Info can be read but you must manually write `quit` afterwards
+  - `info playlist` : display the loaded playlist
+  - `info help` : show the various commands
 
 
 cmd
 d:
 cd d:\tmp
 
-### ================ Clean =================
-Clean up:
-- kill-it
-
-Initialize
-- startloop
-
-Control
-- run play
-- run pause
-- run stop
-
-Info
-- run_stay playlist
-- run_stay help
-
-# Start playing ---------------
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
-
-# Speed stuff ---------------
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 6\nquit"
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 10\nquit"
-
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "zoom 1\nquit"
-
-
-
-
-# %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-%vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 
-%vlc% %file_2% -I telnet --telnet-host 127.0.0.1 --telnet-port 5552 --telnet-password=pw --zoom 0.4 --start-time 10
-%vlc% %file_3% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw --zoom 0.4 --start-time 100
-%vlc% %file_4% -I telnet --telnet-host 127.0.0.1 --telnet-port 5554 --telnet-password=pw --zoom 0.4 --start-time 1000
-# %vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
-
-
-
-# %kitty% telnet://master@127.0.0.1:5553 -pass pw
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "help\ndescription\nquit"
-
-
-
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "pause\nquit"
-%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "pause\nquit"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "pause\nquit"
-%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "pause\nquit"
-
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "play\nquit"
-%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "play\nquit"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "play\nquit"
-%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "play\nquit"
-
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 4\nquit"
-%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "rate 4\nquit"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "rate 4\nquit"
-%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "rate 4\nquit"
-
-%kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "rate 1\nquit"
-%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "rate 1\nquit"
-%kitty% telnet://master@127.0.0.1:5553 -pass pw -cmd "rate 1\nquit"
-%kitty% telnet://master@127.0.0.1:5554 -pass pw -cmd "rate 1\nquit"

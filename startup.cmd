@@ -1,13 +1,10 @@
-@call config.cmd
-@echo ---------------------------------
-@echo playlist: %1
-@echo port: %2
-@echo zoom: %3
-@echo advance: %4
-
-:: Start VLC
-start "zzz" %vlc_full% -I telnet --telnet-host 127.0.0.1 --telnet-port %2 --telnet-password=pw --zoom %3 --start-time %4
-
-:: Use KiTTY to fill the queue
-for /F "tokens=*" %%A in (%1) do start "xxx" %kitty_full% telnet://master@127.0.0.1:%2 -pass pw -cmd "enqueue %%A\nquit"
-@echo ---------------------------------
+@echo off
+call config.cmd
+@set /a port=%port_start%
+:: https://stackoverflow.com/a/2919699/1617124
+setlocal ENABLEDELAYEDEXPANSION 
+for /F "tokens=*" %%A in (folders.txt) do (
+    set /a port=port+1
+    call start_and_enqueue.cmd %%A\playlist.pl !port! %zoom% %advance%
+) 
+endlocal
