@@ -94,6 +94,7 @@ set PLAYLIST_1=playlist_1
 # for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do echo %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A%\nquit"
 for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "enqueue %A\nquit"
 %kitty% telnet://master@127.0.0.1:5551 -pass pw -cmd "playlist"
+%kitty% telnet://master@127.0.0.1:5552 -pass pw -cmd "playlist"
 
 
 # Start playing ---------------
