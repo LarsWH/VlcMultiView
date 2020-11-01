@@ -26,12 +26,13 @@ After downloading the above tools, proceed like this:
 
 ## Run
 - Open a command prompt in the git folder
-- Run `playlist` to generated play-list files based on the `folders.txt` file. 
+- Generated play-list files by running
+  - `playlist`. This generates play lists based on the `folders.txt` file. 
 - Check the folders to see if the generated playlists are OK
 - Initialize the system:
   - `startup` which starts VLC and loads playlists, but does not start playback. 
 - Now you are ready to start the play-back
-  - `run start` : start playing
+  - `run play` : start playing
   - `run pause` : pause playing
   - `run rate <n>` : increase the playback to n-times (yes, there are limits...)
   - `run zoom 0.6` : chang the zoom ratio
