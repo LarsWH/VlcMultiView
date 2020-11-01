@@ -1,16 +1,7 @@
 cmd
 cd C:\Program Files\VideoLAN\VLC
 vlc --help
-dir g:
-dir "g:\ZOO 2020\2020-10-09"
-
-dir "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4"
-dir "g:\ZOO 2020\2020-10-09\2020-10-09_Taarn_m_vand\20201009_090712A.mp4"
-
-copy "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4" c:\tmp
-dir c:\tmp
-vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4"
-start "fil1" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4" && start "fil2" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Taarn_m_vand\20201009_090712A.mp4"
+# start "fil1" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Dame_H\20201009_084612A.mp4" && start "fil2" vlc "g:\ZOO 2020\2020-10-09\2020-10-09_Taarn_m_vand\20201009_090712A.mp4"
 
 
 https://superuser.com/questions/665838/vlc-play-two-mp3s-simultaneously-from-command-line
@@ -27,7 +18,6 @@ vlc --ttl 12 -vvv --color -I telnet --telnet-password videolan --rtsp-host 127.0
 
 
 
-set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
 
 cmd
 d:
@@ -50,13 +40,31 @@ echo %file_2%
 echo %file_3%
 echo %file_4%
 
+
+### VLC ###
+set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
+### Kitty ###
+# https://www.fosshub.com/KiTTY.html
+# http://www.9bis.net/kitty/#!pages/CommandLine.md
+set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
+# echo %kitty%
+# %kitty%
+
 # ================ Clean =================
 taskkill /F /T /IM kitty_portable-0.74.2.7.exe
 taskkill /F /T /IM vlc.exe
+taskkill /F /T /IM vlc.exe
+taskkill /F /T /IM vlc.exe
 
+cmd
+d:
+cd d:\tmp
+call startloop.cmd
 
-set /a port=5550 && for /F "tokens=*" %A in (folders.txt) do (set /a port=port+1 && call startup.cmd %A\playlist.pl %port%)
+set /a advance=0
+set zoom=0.4
 
+set /a port=5550 && setlocal ENABLEDELAYEDEXPANSION && for /F "tokens=*" %A in (folders.txt) do (set /a port=port+1 && call startup.cmd %A\playlist.pl %port% %zoom% %advance%) && endlocal
 
 
 # ---- Playlist ----
@@ -101,13 +109,6 @@ for /F "tokens=*" %A in (%PLAYLIST_1%_.txt) do %kitty% telnet://master@127.0.0.1
 
 
 
-### Kitty ###
-# https://www.fosshub.com/KiTTY.html
-# http://www.9bis.net/kitty/#!pages/CommandLine.md
-
-set kitty=d:\tmp\kitty_portable-0.74.2.7.exe
-# echo %kitty%
-# %kitty%
 # %vlc% -I telnet --telnet-host 127.0.0.1 --telnet-port 5553 --telnet-password=pw
 %vlc% %file_1% -I telnet --telnet-host 127.0.0.1 --telnet-port 5551 --telnet-password=pw --zoom 0.4 --start-time 1 
 %vlc% %file_2% -I telnet --telnet-host 127.0.0.1 --telnet-port 5552 --telnet-password=pw --zoom 0.4 --start-time 10
